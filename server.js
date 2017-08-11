@@ -20,7 +20,7 @@ var articleOne = {
                 </p>`
 };
 
-function createTemplatae(data){
+function createTemplatae (data) {
     var tile = data.title;
     var date = data.date;
     var heading = data.heaidng;
