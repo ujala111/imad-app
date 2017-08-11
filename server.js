@@ -5,6 +5,14 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
+var content{
+    title: 'Article-one | Ujjwal';
+    heading: 'Article-one';
+    date: '14 May, 1995';
+    content: '    '
+    
+}
+
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
