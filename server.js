@@ -5,19 +5,49 @@ var path = require('path');
 var app = express();
 app.use(morgan('combined'));
 
-var articleOne = {
-    title: 'Article-one | Ujjwal',
-    heading: 'Article-one',
-    date: '14 May, 1995',
-    content: `<p>
-                    This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it.
-                </p>
-                <p>
-                    This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it.
-                </p>
-                <p>
-                    This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it.
-                </p>`
+var article = {
+    'article-one': {
+        title: 'Article-one | Ujjwal',
+        heading: 'Article-one',
+        date: '14 May, 1995',
+        content: `<p>
+                        This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it.
+                    </p>
+                    <p>
+                        This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it.
+                    </p>
+                    <p>
+                        This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it.
+                    </p>`
+        },
+    'article-two': {
+        title: 'Article-two | Ujjwal',
+        heading: 'Article-two',
+        date: '14 Dec, 1995',
+        content: `<p>
+                        This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it.
+                    </p>
+                    <p>
+                        This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it.
+                    </p>
+                    <p>
+                        This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it.
+                    </p>`
+    },
+    'article-three': {
+        title: 'Article-three | Ujjwal',
+        heading: 'Article-three',
+        date: '4 Sep, 1995',
+        content: `<p>
+                        This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it.
+                    </p>
+                    <p>
+                        This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it.
+                    </p>
+                    <p>
+                        This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it. This is so cool tutorial. I'm enjoying and learning it.
+                    </p>`
+    },
 };
 
 function createTemplate (data) {
@@ -63,16 +93,9 @@ app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
 
-app.get('/article-one', function (req, res) {
-   res.send(createTemplate(articleOne));
-});
-
-app.get('/article-two', function (req, res) {
-   res.sendFile(path.join(__dirname, 'ui', 'article-two.html'));
-});
-
-app.get('/article-three', function (req, res) {
-   res.sendFile(path.join(__dirname, 'ui', 'article-three.html')); 
+app.get('/:articleName', function (req, res) {
+   var articleName = req.params.articleName;
+   res.send(createTemplate(articles[articleName])); //articleName will be article-one
 });
 
 // Do not change port, otherwise your app won't run on IMAD servers
