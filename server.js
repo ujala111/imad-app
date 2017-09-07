@@ -4,6 +4,14 @@ var path = require('path');
 
 var app = express();
 app.use(morgan('combined'));
+var Pool = require('pg').Pool;
+var config = {
+    user: 'ujjwal',
+    databse: 'ujjwal',
+    host: 'http://db.imad.hasura-app.io',
+    port: '5432',
+    password: process.env.db-ujjwal-12834
+};
 
 var article = {
     'article-one': {
@@ -105,6 +113,16 @@ app.get('/:articleName', function (req, res) {
    var articleName = req.params.articleName;
    res.send(createTemplate(article[articleName])); //articleName will be article-one
 });
+var pool = new Pool(config);
+app.get('/test-db'), function(req, res){
+    pool.query('SELECT* FROM test', function(err, result){
+      if(err){
+          res.status(500).send(err, toString());
+      }  else{
+          res.send(JSON, string(fy(result)));
+      }
+    });
+};
 
 // Do not change port, otherwise your app won't run on IMAD servers
 // Use 8080 only for local development if you already have apache running on 80
